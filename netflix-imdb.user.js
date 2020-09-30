@@ -14,10 +14,10 @@
 // @grant        GM_removeValueChangeListener
 // @grant        GM_openInTab
 // @connect      imdb.com
-// @resource     customCSS  https://raw.githubusercontent.com/ioannisioannou16/netflix-imdb/master/netflix-imdb.css
-// @resource     imdbIcon   https://raw.githubusercontent.com/ioannisioannou16/netflix-imdb/master/imdb-icon.png
-// @updateURL    https://github.com/ioannisioannou16/netflix-imdb/raw/master/netflix-imdb.user.js
-// @downloadURL  https://github.com/ioannisioannou16/netflix-imdb/raw/master/netflix-imdb.user.js
+// @resource     customCSS  https://raw.githubusercontent.com/cwitting/netflix-imdb/master/netflix-imdb.css
+// @resource     imdbIcon   https://github.com/cwitting/netflix-imdb/raw/master/imdb-icon.png
+// @updateURL    https://github.com/cwitting/netflix-imdb/raw/master/netflix-imdb.user.js
+// @downloadURL  https://github.com/cwitting/netflix-imdb/raw/master/netflix-imdb.user.js
 // ==/UserScript==
 
 (function() {
