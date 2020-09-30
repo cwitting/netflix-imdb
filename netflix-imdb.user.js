@@ -208,13 +208,30 @@
 
     if (!rootElement) return;
 
-    function imdbRenderingForCard(node) {
-        var titleNode = node.querySelector(".bob-title");
-        var title = titleNode && titleNode.textContent;
+    function imdbRenderingForPop(node) {
+        console.log("testA");
+        console.log(node)
+        var titleNode = node.querySelector(".playerModel--player__storyArt");
+        var title = titleNode && titleNode.getAttribute("alt");
         if (!title) return;
+
         var ratingNode = getRatingNode(title);
-        ratingNode.classList.add("imdb-overlay");
-        node.appendChild(ratingNode);
+        ratingNode.classList.add("imdb-overlay2");
+        ratingNode.setAttribute("margin", "auto");
+        titleNode.parentNode.insertBefore(ratingNode, titleNode);
+    }
+
+    function imdbRenderingForCard(node) {
+        console.log("testA");
+        console.log(node)
+        var titleNode = node.querySelector("[aria-label]");
+        var title = titleNode && titleNode.getAttribute("aria-label");
+        console.log(title)
+        if (!title) return;
+        console.log("Doing card: " + title);
+        var ratingNode = getRatingNode(title);
+        ratingNode.classList.add("imdb-overlay2");
+        titleNode.parentNode.insertBefore(ratingNode, titleNode);
     }
 
     function imdbRenderingForTrailer(node) {
@@ -247,6 +264,15 @@
         var ratingNode = getRatingNode(title);
         meta.parentNode.insertBefore(ratingNode, meta.nextSibling);
     }
+    function imdbRenderingForAria(node) {
+        var titleNode = node.querySelector(".video-artwork");
+        var title = titleNode && titleNode.getAttribute("alt");
+        if (!title) return;
+        var meta = node.querySelector(".meta");
+        if (!meta) return;
+        var ratingNode = getRatingNode(title);
+        meta.parentNode.insertBefore(ratingNode, meta.nextSibling);
+    }
 
     function cacheTitleRanking(node) {
         var titleNode = node.querySelector(".fallback-text");
@@ -261,12 +287,18 @@
 
             for (var j = 0; j < newNodes.length; j++) {
                 var newNode = newNodes[j];
+                //console.log(newNode);
                 if (!(newNode instanceof HTMLElement)) continue;
 
-                if (newNode.classList.contains("bob-card")) {
-                    imdbRenderingForCard(newNode);
+                if (newNode.classList.contains("storyArt")) {
+                    imdbRenderingForPop(newNode);
                     continue;
                 }
+
+                var cards = newNode.querySelectorAll(".title-card-container");
+                cards.forEach(function(card_node) {
+                    imdbRenderingForCard(card_node);
+                });
 
                 var trailer = newNode.querySelector(".billboard-row");
                 if (trailer) {
@@ -310,6 +342,12 @@
 
     var existingTrailer = document.querySelector(".billboard-row");
     existingTrailer && imdbRenderingForTrailer(existingTrailer);
+
+    var cards = document.querySelectorAll(".title-card-container");
+
+    cards.forEach(function(card_node) {
+      imdbRenderingForCard(card_node);
+    });
 
     window.addEventListener("beforeunload", function () {
         observer.disconnect();

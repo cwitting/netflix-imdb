@@ -35,3 +35,10 @@
   right: 10px;
   z-index: 100; 
 }
+
+.imdb-overlay2 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+}
